@@ -1,0 +1,978 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>reveal.js - The HTML Presentation Framework</title>
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-id="9a07e92e33a220f697849c89d5ca74f7">
+                <h1>Overview of the&nbsp;<br>HTML 5 client storage technologies</h1>
+                <br>
+                <h3>BY DENI SPASOVSKI</h3>
+                <div>
+                    denimf @ <a href="https://twitter.com/denimf">twitter</a>/<a href="https://github.com/denimf">github</a>/<a href="denimf@gmail.com">gmail</a>
+                </div>
+            </section>
+            <section data-id="c99d5848fd476bf63e83eda234c27193">
+                <h2>Client storage?</h2>
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/denispasovski/images/350528/XCAcEzT.jpg" style="width: 519px; height: 519px; max-height: none; max-width: none;" class="fragment" data-fragment-index="0">
+            </section>
+            <section data-id="0dafcb4450d18d07edd53949c717f91f">
+                <h2>HTML 5 Client storage Technologies</h2>
+                <div>
+                    <ul>
+                        <li class="fragment" data-fragment-index="0">
+                            <span>Web Storage</span>
+                        </li>
+                        <li class="fragment" data-fragment-index="1">
+                            <span>Indexed DB&nbsp;</span>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            <span>File System API</span>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            <span>Web SQL (deprecated)</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section data-id="e070883b7ca4253dc2aab0632c6d5135">
+                <section data-id="8dd214974231a60670d89435860ec5a0">
+                    <h2>Web storage</h2>
+                    <div>
+                        <ul>
+                            <li class="fragment" data-fragment-index="0">Key/Value store</li>
+                            <li class="fragment" data-fragment-index="1">Stores values as string</li>
+                            <li class="fragment" data-fragment-index="2">Access scoped to an HTML5 origin&nbsp;</li>
+                            <ul>
+                                <li class="fragment" data-fragment-index="2">(scheme + hostname + non-standard port)</li>
+                            </ul>
+                            <li class="fragment" data-fragment-index="3">Not accessible from web workers</li>
+                        </ul>
+                    </div>
+                </section>
+                <section data-id="f16b61729f1ff7a7e63759a9b8bffb69">
+                    <h2>Two DIFFERENT types of Web Storage</h2>
+                    <div>
+                        <ul>
+                            <li class="fragment" data-fragment-index="0">
+                                <span style="text-align: center;">session storage</span>
+                            </li>
+                            <ul>
+                                <li class="fragment" data-fragment-index="1">
+                                    <span style="text-align: center;">temporary storage -&nbsp;</span>
+                                    <span>objects are available until the browser is closed</span>
+                                </li>
+                                <li class="fragment" data-fragment-index="2">opening the same page in new window will create different session storage scope</li>
+                            </ul>
+                            <li class="fragment" data-fragment-index="3">
+                                <span style="text-align: center;">local storage</span>
+                            </li>
+                            <ul>
+                                <li class="fragment" data-fragment-index="4">
+                                    <span style="text-align: center;">persistent storage - data is stored until the user deletes history</span>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section data-id="9071026a2b055d9940381bd3c2cfe75c">
+                    <h2>Can I USE WEB STORAGE</h2>
+                    <div class="fragment" data-fragment-index="0">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th style="text-align: center; ">Chrome</th>
+                                    <th style="text-align: center; ">IE</th>
+                                    <th style="text-align: center; ">Firefox</th>
+                                    <th style="text-align: center; ">Opera</th>
+                                    <th style="text-align: center; ">Safari</th>
+                                </tr>
+                                <tr>
+                                    <td>localStorage</td>
+                                    <td style="text-align: center; ">4</td>
+                                    <td style="text-align: center; ">8</td>
+                                    <td style="text-align: center; ">3.5</td>
+                                    <td style="text-align: center; ">10.50</td>
+                                    <td style="text-align: center; ">4</td>
+                                </tr>
+                                <tr>
+                                    <td>sessionStorage</td>
+                                    <td style="text-align: center; ">5</td>
+                                    <td style="text-align: center; ">8</td>
+                                    <td style="text-align: center; ">2</td>
+                                    <td style="text-align: center; ">10.50</td>
+                                    <td style="text-align: center; ">4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="fragment" data-fragment-index="1">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th style="text-align: center; ">Android Browser</th>
+                                    <th style="text-align: center; ">Android Chrome</th>
+                                    <th style="text-align: center; ">IE Mobile</th>
+                                    <th style="text-align: center; ">iOS Safari</th>
+                                </tr>
+                                <tr>
+                                    <td>localStorage</td>
+                                    <td style="text-align: center; ">2.1</td>
+                                    <td style="text-align: center; ">18</td>
+                                    <td style="text-align: center; ">10</td>
+                                    <td style="text-align: center; ">3.2</td>
+                                </tr>
+                                <tr>
+                                    <td>sessionStorage</td>
+                                    <td style="text-align: center; ">2.1</td>
+                                    <td style="text-align: center; ">18</td>
+                                    <td style="text-align: center; ">10</td>
+                                    <td style="text-align: center; ">3.2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </section>
+            </section>
+            <section data-id="098feea9137c192d5c9f29e5ee2630f4">
+                <section data-id="9e0df4b5153abd48d9aac146a6e92021">
+                    <h2>IndexEd db</h2>
+                    <div>
+                        <ul>
+                            <li class="fragment" data-fragment-index="0">It is a NOSQL database hosted inside the browser</li>
+                            <li class="fragment" data-fragment-index="1">
+                                Access scoped to an HTML5 origin
+                            </li>
+                            <li class="fragment" data-fragment-index="2">The IndexedDB API is mostly asynchronous</li>
+                            <li class="fragment" data-fragment-index="3">IndexedDB is built on a transactional database model</li>
+                            <li class="fragment" data-fragment-index="4">You need a 'request' for anything from IndexedDB</li>
+                            <li class="fragment" data-fragment-index="5">There is no free text search and index join</li>
+                            <li class="fragment" data-fragment-index="6">It's accessible from web workers in Chrome and IE</li>
+                        </ul>
+                    </div>
+
+
+                </section>
+                <section data-id="02e75ac5c28e01cd10d82cfd102058c7">
+                    <h2>Indexed DB model</h2>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/denispasovski/images/350518/dasda2.png" style="width: 913.5849056603773px; height: 269px; max-height: none; max-width: none;">
+                </section>
+                <section data-id="a92b42a24407721cadb6d4a0118f6005">
+                    <h2>Indexed DB requesT</h2>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/denispasovski/images/350502/sasa.png">
+                </section>
+                <section data-id="afc656d4bedf801187cacf038dbe54dd">
+                    <h2>Can I use Indexed DB</h2>
+                    <table class="fragment" data-fragment-index="0">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <font style="font-size: 24px;">Feature</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">Chrome</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">IE</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">Firefox</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">Opera</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">Safari</font>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font style="font-size: 24px;">Asynchronous API</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">11.0/24.0</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">10</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">4.0/16.0</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">17</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">n/a</font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="fragment" data-fragment-index="1">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <font style="font-size: 24px;">Feature</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">Android Browser</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">Android Chrome</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">IE Mobile</font>
+                                </th>
+                                <th style="text-align: center; ">
+                                    <font style="font-size: 24px;">iOS Safari</font>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font style="font-size: 24px;">Asynchronous API</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">4.4</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">18</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">10</font>
+                                </td>
+                                <td style="text-align: center; ">
+                                    <font style="font-size: 24px;">n/a</font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section data-id="0a3e42dc27231445d1a9befa68d346df">
+                    <h2>Performance test</h2>
+                    <div>
+                        <ul>
+                            <li class="fragment" data-fragment-index="0">Insert 2500 objects with one transaction</li>
+                            <li class="fragment" data-fragment-index="1">Object size ~1KB</li>
+                            <li class="fragment" data-fragment-index="2">Tests:</li>
+                            <ul>
+                                <li class="fragment" data-fragment-index="3">delete database</li>
+                                <li class="fragment" data-fragment-index="4">insert data with 4 parallel web workers</li>
+                                <li class="fragment" data-fragment-index="5">search without index</li>
+                                <li class="fragment" data-fragment-index="6">search with key index</li>
+                                <li class="fragment" data-fragment-index="7">search with range index</li>
+
+                            </ul>
+                            <li class="fragment" data-fragment-index="8">results are in milliseconds&nbsp;</li>
+                        </ul>
+                    </div>
+                </section>
+                <section data-id="d94c6be9284260c97289ec397db413aa">
+                    <h2>
+                        Performance hdd vs&nbsp;<span style="font-size: 75.96px;">SSD</span>
+                    </h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <font style="font-size: 24px;">Mozila</font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 24px;">SSD FF</font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 24px;">Chrome</font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 24px;">SSD Chrome</font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 24px;">IE (80K)</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font style="font-size: 24px;">total</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">111232</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">143799</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">68443</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">26567</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">96253</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font style="font-size: 24px;">delete</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">36</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">84</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">11643</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">10113</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">28</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font style="font-size: 24px;">init</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">69854</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">45379</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">50052</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">10497</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">63783</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font style="font-size: 24px;">search</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">11679</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">39028</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">5079</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">5012</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">25615</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font style="font-size: 24px;">key search</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">25836</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">49281</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">821</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">457</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">2904</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font style="font-size: 24px;">range search</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">3827</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">10027</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">848</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">488</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font style="font-size: 24px;">3923</font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    results are in milliseconds
+                </section>
+                <section data-id="9746ab839d4a0c6d120bb8873f72ea30">
+                    <h2>Performance vs data set IE</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td style="text-align: right; ">10K</td>
+                                <td style="text-align: right; ">80K</td>
+                                <td style="text-align: right; ">500K</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td align="right" style="text-align: right; ">12643</td>
+                                <td align="right" style="text-align: right; ">96253</td>
+                                <td style="text-align: right; ">n/a</td>
+                            </tr>
+                            <tr>
+                                <td>delete</td>
+                                <td align="right" style="text-align: right; ">26</td>
+                                <td align="right" style="text-align: right; ">28</td>
+                                <td style="text-align: right; ">n/a</td>
+                            </tr>
+                            <tr>
+                                <td>init</td>
+                                <td align="right" style="text-align: right; ">7617</td>
+                                <td align="right" style="text-align: right; ">63783</td>
+                                <td style="text-align: right; ">n/a</td>
+                            </tr>
+                            <tr>
+                                <td>search</td>
+                                <td align="right" style="text-align: right; ">4069</td>
+                                <td align="right" style="text-align: right; ">25615</td>
+                                <td style="text-align: right; ">n/a</td>
+                            </tr>
+                            <tr>
+                                <td>key search</td>
+                                <td align="right" style="text-align: right; ">415</td>
+                                <td align="right" style="text-align: right; ">2904</td>
+                                <td style="text-align: right; ">n/a</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    range search
+                                </td>
+                                <td align="right" style="text-align: right; ">516</td>
+                                <td align="right" style="text-align: right; ">3923</td>
+                                <td style="text-align: right; ">n/a</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    results are in milliseconds
+                </section>
+                <section data-id="684584e4e6b971fd34985c9bc143f071">
+                    <h2 style="font-style: normal; font-variant: normal;">PERFORMANCE VS DATA SET FF</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td style="text-align: right; ">10K</td>
+                                <td style="text-align: right; ">80K</td>
+                                <td style="text-align: right; ">500K</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td align="right" style="text-align: right; ">9736</td>
+                                <td align="right" style="text-align: right; ">143799</td>
+                                <td align="right" style="text-align: right; ">1205569</td>
+                            </tr>
+                            <tr>
+                                <td>delete</td>
+                                <td align="right" style="text-align: right; ">66</td>
+                                <td align="right" style="text-align: right; ">84</td>
+                                <td align="right" style="text-align: right; ">201</td>
+                            </tr>
+                            <tr>
+                                <td>init</td>
+                                <td align="right" style="text-align: right; ">4303</td>
+                                <td align="right" style="text-align: right; ">45379</td>
+                                <td align="right" style="text-align: right; ">274360</td>
+                            </tr>
+                            <tr>
+                                <td>search</td>
+                                <td align="right" style="text-align: right; ">4012</td>
+                                <td align="right" style="text-align: right; ">39028</td>
+                                <td align="right" style="text-align: right; ">190964</td>
+                            </tr>
+                            <tr>
+                                <td>key search</td>
+                                <td align="right" style="text-align: right; ">857</td>
+                                <td align="right" style="text-align: right; ">49281</td>
+                                <td align="right" style="text-align: right; ">680213</td>
+                            </tr>
+                            <tr>
+                                <td>range search</td>
+                                <td align="right" style="text-align: right; ">498</td>
+                                <td align="right" style="text-align: right; ">10027</td>
+                                <td align="right" style="text-align: right; ">59831</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    results are in miliseconds
+                </section>
+                <section data-id="5eff02f69cffdabf1c813096115725ef">
+                    <h2 style="font-style: normal; font-variant: normal;">PERFORMANCE VS DATA SET Chrome</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: right; "></td>
+                                <td style="text-align: right; ">
+                                    <font>10K</font>
+                                </td>
+                                <td style="text-align: right; ">
+                                    <font>80K</font>
+                                </td>
+                                <td style="text-align: right; ">
+                                    <font>500K</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font>total</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>3744</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>26567</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>184669</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font>delete</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>755</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>10113</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>58325</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font>init</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>1620</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>10497</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>48303</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font>search</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>1170</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>5012</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>65101</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    <font>key search</font>
+                                </td>
+                                <td align="right" style="text-align: right;">
+                                    <font>94</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>457</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>5978</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>range search</span>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>105</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>488</font>
+                                </td>
+                                <td align="right" style="text-align: right; ">
+                                    <font>6962</font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    results are in miliseconds
+                </section>
+            </section>
+            <section data-id="910cfe8ad37b0cc976400dd2498d1858">
+                <section data-id="6bf11c213ffaa867d7d6866aa56d1a42">
+                    <h2>File SYstem API</h2>
+                    <div>
+                        <ul>
+                            <li class="fragment" data-fragment-index="0">File system like storage sand boxed in the browser</li>
+                            <li class="fragment" data-fragment-index="1">It supports folder structure</li>
+                            <li class="fragment" data-fragment-index="2">It's not yet a standard, it's supported only in Chrome</li>
+                            <li class="fragment" data-fragment-index="3">
+                                Access scoped to an HTML5 origin
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                </section>
+                <section data-id="91024095f350512159cda32715eeca61">
+                    <h2>File system API details</h2>
+                    <div>
+                        <div>
+                            <ul>
+                                <li class="fragment" data-fragment-index="0">
+                                    <span style="text-align: center;">Two types of storage</span>
+                                    <br>
+                                </li>
+                                <ul>
+                                    <li class="fragment" data-fragment-index="1">
+                                        <span style="text-align: center;">Temporary - can be deleted by the browser</span>
+                                    </li>
+                                    <li class="fragment" data-fragment-index="2">
+                                        <span style="text-align: center;">Permanent - can be deleted only by the user</span>
+                                    </li>
+                                </ul>
+                                <li class="fragment" data-fragment-index="3">
+                                    <span style="text-align: center;">You can start using the API by creating File System request</span>
+                                    <br>
+                                </li>
+                                <li class="fragment" data-fragment-index="4">
+                                    <span style="text-align: center;">Permanent storage requires quota request prior to File System request</span>
+                                    <br>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section data-id="52150e3678f3230f8cf28b0598d5c7e8">
+                    <h2>File system request</h2>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/denispasovski/images/350550/dasda22.png">
+                </section>
+                <section data-id="c456f762b5ef9f82393dccd2b1272225">
+                    <h2>Can I use File System API</h2>
+                    <div class="fragment" data-fragment-index="0">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <font style="font-size: 24px;">Feature</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">Chrome</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">IE</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">Firefox</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">Opera</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">Safari</font>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <font style="font-size: 24px;">File Reader API</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">13</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">10</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">3.6</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">6.0</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">11.1</font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <font style="font-size: 24px;">File Writer API</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">13</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">n/a</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">n/a</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">15</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">n/a</font>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <font style="font-size: 24px;">
+                        <br>
+                        <br>
+                    </font>
+                    <div class="fragment" data-fragment-index="1">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <font style="font-size: 24px;">Feature</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">Android Browser</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">Android Chrome</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">IE Mobile</font>
+                                    </th>
+                                    <th style="text-align: center; ">
+                                        <font style="font-size: 24px;">iOS Safari</font>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <font style="font-size: 24px;">File Reader API</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">4.4</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">18</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">10</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">6.0</font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <font style="font-size: 24px;">File Writer API</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">n/a</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">18</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">n/a</font>
+                                    </td>
+                                    <td style="text-align: center; ">
+                                        <font style="font-size: 24px;">n/a</font>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </section>
+            </section>
+            <section data-id="b301dbf0b1b8db6e06ee4deb599875c8">
+                <section data-id="40234085ebe26071b8a93c21f1bba5d7">
+                    <h2>Web SQL</h2>
+                    <div>
+                        <ul>
+                            <li>API to SQLite hosted inside the browser</li>
+                            <li>It's no longer a standard</li>
+                            <li>Still used in Phone GAP</li>
+                        </ul>
+                    </div>
+                </section>
+                <section data-id="99bd4ab2aafba1b76bda1be411438166">
+                    <h2>
+                        <div class="fragment" data-fragment-index="0" style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; font-size: 36px; font-style: normal; font-variant: normal; font-weight: normal; vertical-align: baseline; opacity: 0.5; -webkit-transition: all 0.2s ease; transition: all 0.2s ease; color: rgb(238, 238, 238); orphans: auto; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+                        </div>
+                    </h2>
+                    <h2 style="box-sizing: border-box; font-weight: normal; margin: 0px 0px 20px; padding: 0px; font-size: 75.96px; border: 0px; font-style: normal; font-variant: normal; vertical-align: baseline; word-wrap: break-word; text-transform: uppercase; text-shadow: rgba(0, 0, 0, 0.2) 0px 0px 6px; color: rgb(238, 238, 238); orphans: auto; text-align: center; text-indent: 0px; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">CAN I USE WEB SQL</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <font style="font-size: 220px;">Don't!</font>
+                    </div>
+                </section>
+            </section>
+            <section data-id="d450862fe01eed0ed7aaf31205eead4e">
+                <h2>RECOMMENDED Usage</h2>
+                <div>
+                    <ul>
+                        <li style="font-size: 36px; font-style: normal; font-variant: normal;" class="fragment" data-fragment-index="0">Web Storage - simple data</li>
+                        <li style="font-size: 36px; font-style: normal; font-variant: normal;" class="fragment" data-fragment-index="1">Indexed DB - structured data (objects)</li>
+                        <li style="font-size: 36px; font-style: normal; font-variant: normal;" class="fragment" data-fragment-index="2">File System API - binary data (files)</li>
+                        <li style="font-size: 36px; font-style: normal; font-variant: normal;" class="fragment" data-fragment-index="3">Web SQL (deprecated)&nbsp;- don't use it!</li>
+                    </ul>
+                </div>
+            </section>
+            <section data-id="10c4ebcb187e8b210eb5e31acd6c46f9">
+                <h2>Note From Author</h2>
+                <div class="fragment" data-fragment-index="0">Data on the client side can be lost at any time!</div>
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/denispasovski/images/350526/RBdS9ot.jpg" style="width: 638.6666666666666px; height: 479px; max-height: none; max-width: none;" class="fragment" data-fragment-index="0">
+            </section>
+            <section data-id="e5b610061f767803ab800d9d55b284cb">
+                <h2>Questions</h2>
+                <div>
+                    <font style="font-size: 200px;">?</font>
+                </div>
+            </section>
+            <section data-id="5324d6d7f2f25f30b5eeb5daf7f3a885">
+                <h2>Demo</h2>
+                <div>
+                    <img src="http://www.pixelstech.net/article/images/matrix.png" style="width: 659.484649122807px; height: 523px; max-height: none; max-width: none;">
+                    <br>
+                </div>
+            </section>
+            <section data-id="5f2e24fb41dfc5673180971d36bb8e38">
+                <h2>Resources</h2>
+                <div>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/denimf/HTML5ClientSideStorageSamples">https://github.com/denimf/HTML5ClientSideStorageSamples</a>
+                            <br>
+                        </li>
+                        <li>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/API">https://developer.mozilla.org/en-US/docs/Web/API</a>
+                            <br>
+                        </li>
+                        <li>
+                            <a href="http://www.html5rocks.com/en/tutorials/offline/storage/">
+                                http://www.html5rocks.com/en/tutorials/offline/storage/<br>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.w3.org/TR/webstorage/">
+                                http://www.w3.org/TR/webstorage/<br>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.w3.org/TR/IndexedDB/">
+                                http://www.w3.org/TR/IndexedDB/<br>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.w3.org/TR/webdatabase/">
+                                http://www.w3.org/TR/webdatabase/<br>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.w3.org/TR/file-system-api/">
+                                http://www.w3.org/TR/file-system-api/<br>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section data-id="675b458bd6d303fe09df1781ccc0ddf6">
+                <h2>thank you!</h2>
+                <div>
+                    <h2 style="font-style: normal; font-variant: normal;">OVERVIEW OF THE HTML 5 CLIENT STORAGE TECHNOLOGIES</h2>
+                    <h3 style="font-style: normal; font-variant: normal;">BY DENI SPASOVSKI</h3>
+                    <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+                        denimf @&nbsp;<a href="https://twitter.com/denimf">twitter</a>/<a href="https://github.com/denimf">github</a>/<a href="https://slides.com/denispasovski/html-5-client-storage-technologies/denimf@gmail.com">gmail</a>
+                    </div>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/denispasovski/images/350521/qrcode.21670384.png">
+                    <br>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition:  'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>

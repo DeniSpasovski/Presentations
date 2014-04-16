@@ -1,0 +1,1 @@
+HTML5 client storage technologies - originally presented at NYC HTML 5 meetup http://www.meetup.com/nychtml5/events/170965392/
